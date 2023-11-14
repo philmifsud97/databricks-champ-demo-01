@@ -51,8 +51,6 @@ jobs:
 
     - name: Run Integration test Pipeline
       run: |
-        echo "$TEST_DLT_PIPELINE_ID $TEST_DLT_PIPELINE_NAME"
-        echo "Databricks version"
         databricks -v
         DLT_START=$SECONDS
         DLT_START_ISO=$(date --iso-8601=seconds)
@@ -62,7 +60,7 @@ jobs:
           DLT_STATUS=$(databricks jobs get-run $JOB_ID |jq -r .state.life_cycle_state)
           DLT_RESULT=$(databricks jobs get-run $JOB_ID |jq -r .state.result_state)
           if [ "$DLT_STATUS" = "CANCELED" -o "$DLT_STATUS" = "SKIPPED" -o "$DLT_STATUS" = "FAILED" -o "$DLT_STATUS" = "TERMINATED" ]; then
-            echo "Exiting loop with status '$DLT_STATUS'"
+            echo "Exiting loop with status '$DLT_STATUS' with results '$DLT_RESULT'"
             break
           fi
           echo "DLT pipeline status is '$DLT_STATUS'. Waiting..."
