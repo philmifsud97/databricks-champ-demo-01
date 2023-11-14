@@ -53,8 +53,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check Ref
-    run: |
-     {{ $github.ref_name }}
+      run: |
+        echo "${{ github.ref_name }}"
      
   OnRelease:
     if: startsWith(github.ref_name, 'releases')
