@@ -26,7 +26,7 @@ variable "github_repo" {
 
 variable "cluster_prefix" {
     description = "cluster name prefix"
-    type = string
+    type = string 
     default = "Databricks Champ Demo 01 TF"
 }
 
